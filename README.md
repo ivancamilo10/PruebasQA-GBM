@@ -18,7 +18,7 @@ Descripción: Este repositorio contiene las pruebas (QA) relacionadas con los pr
 - `README.md`  
   Este archivo.
 
-> Nota: la estructura puede ampliarse según las necesidades del equipo.
+
 
 ---
 
