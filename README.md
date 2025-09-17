@@ -29,3 +29,4 @@ Centralizar y versionar todas las pruebas de QA para facilitar:
 - Reutilización de scripts y configuraciones.
 - Generación de evidencias y reportes de ejecución.
 - Colaboración entre miembros del equipo.
+- 
