@@ -1,22 +1,31 @@
+import re
 from spellchecker import SpellChecker
 
-# Crear objeto SpellChecker en español
 spell = SpellChecker(language='es')
 
 def revisar_ortografia(parrafo):
     """
     Recibe un párrafo de texto y devuelve:
     - 1 si hay errores ortográficos, 0 si no
-    - Lista de palabras mal escritas
+    - Lista de palabras mal escritas (ignora números con comas, puntos, etc.)
     """
     palabras = parrafo.split()
-    errores = list(spell.unknown(palabras))
+    palabras_limpias = []
+
+    for p in palabras:
+        # Quitar signos de puntuación al inicio/fin
+        palabra = re.sub(r'^[^\wáéíóúüñ]+|[^\wáéíóúüñ]+$', '', p, flags=re.IGNORECASE)
+
+        # Si es un número (con o sin comas/puntos), se ignora
+        if re.fullmatch(r'[\d.,]+', palabra):
+            continue
+
+        if palabra:  # Evitar cadenas vacías
+            palabras_limpias.append(palabra)
+
+    errores = list(spell.unknown(palabras_limpias))
     resultado = 1 if errores else 0
     return resultado, errores
 
-# Ejemplo de uso
-texto = "Holaa, esttoy probando un detector de ortogrfia."
-estado, palabras_malas = revisar_ortografia(texto)
 
-print("Errores detectados:", estado)          # 1 si hay errores, 0 si no
-print("Palabras mal escritas:", palabras_malas)  # Lista con palabras incorrectas
+# 
