@@ -1,23 +1,23 @@
+import os
+import time
+from PIL import Image
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.webdriver.chrome.options import Options
-
-
-import time
-
-import os
-from PIL import Image
-
-from ElementData import ElementData
-from revisar_ortografia import revisar_ortografia as detectar_falta_ortografica
-from Variables_globales import etiquetas
-from resaltador_palabras import resaltar_palabras
-from capturar_pagina import capturar_pagina_completa
-from utilidades import extraer_elements
-
 from selenium.webdriver.support.ui import WebDriverWait
+
+from funciones.ElementData import ElementData
+from funciones.revisar_ortografia import revisar_ortografia as detectar_falta_ortografica
+from funciones.Variables_globales import etiquetas
+from funciones.resaltador_palabras import resaltar_palabras
+from funciones.capturar_pagina import capturar_pagina_completa
+from funciones.utilidades import extraer_elements
+
+
+
 
 
 
