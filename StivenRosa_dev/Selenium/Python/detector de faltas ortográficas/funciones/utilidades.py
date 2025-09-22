@@ -1,3 +1,16 @@
+
+
+
+
+from funciones.Variables_globales import etiquetas
+from selenium.webdriver.common.by import By
+from funciones.ElementData import ElementData
+
+
+
+
+
+
 def extraer_elements(driver):
     elementos_info = []
 

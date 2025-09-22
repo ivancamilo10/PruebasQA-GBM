@@ -75,10 +75,13 @@ def main():
             detectadas = detectar_falta_ortografica(elemento.texto)
 
             if detectadas[0] == 1:
+                n=0
                 resaltar_palabras(driver, detectadas[1])
                 elementos_faltas.append(elemento)
                 elemento.faltas_ortograficas = detectadas[1]
-
+                elemento.id_elemento = f"p-{n+1}"
+                
+                print(elemento.id_elemento)
                 print(elemento.faltas_ortograficas)
 
                 cantidad_faltas += len(detectadas[1])
@@ -96,6 +99,7 @@ def main():
         print(f"Cantidad de párrafos analizados: {cantidad_parrafos}")
         print(f"Cantidad de palabras analizadas: {cantidad_palabras}")
         print(f"Cantidad de faltas ortográficas: {cantidad_faltas}")
+
         print(elementos_faltas[0].faltas_ortograficas)
 
 

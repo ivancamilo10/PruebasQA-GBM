@@ -1,6 +1,5 @@
 
-from Variables_globales import etiquetas as selectors
-
+from funciones.Variables_globales import etiquetas as selectors
 
 
 def resaltar_palabras(driver, words):

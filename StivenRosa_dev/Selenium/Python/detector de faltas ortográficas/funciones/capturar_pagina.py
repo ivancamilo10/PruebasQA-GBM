@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import os
 
-from Variables_globales import carpeta
+from funciones.Variables_globales import carpeta
 
 
 
