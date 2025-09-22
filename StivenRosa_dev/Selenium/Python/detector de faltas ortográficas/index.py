@@ -2,16 +2,45 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException, TimeoutException
+from selenium.webdriver.chrome.options import Options
+
+
 import time
 
+import os
+from PIL import Image
 
 from ElementData import ElementData
-# from detector import detectar_falta_ortografica
 from revisar_ortografia import revisar_ortografia as detectar_falta_ortografica
+from Variables_globales import etiquetas
+from resaltador_palabras import resaltar_palabras
+from capturar_pagina import capturar_pagina_completa
+from utilidades import extraer_elements
+
+from selenium.webdriver.support.ui import WebDriverWait
+
+
+
+
 
 def initialize_driver(URL='https://www.google.com'):
-    driver = webdriver.Chrome()
+    
+    
+    opciones = Options()
+    opciones.add_argument("--headless=new")  # modo sin interfaz
+    opciones.add_argument("--hide-scrollbars")
+    
+    driver = webdriver.Chrome( options=opciones)
+    
     driver.get(URL)
+
+
+    # Espera hasta que la página haya terminado de cargar (readyState == complete)
+    WebDriverWait(driver, 20).until(
+        lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+    
+    driver.maximize_window()
     return driver
 
 
@@ -19,29 +48,6 @@ def initialize_driver(URL='https://www.google.com'):
 
 
 
-def extract_elements_info(driver):
-    etiquetas = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 
-                 'li', 'span', 'a', 'strong', 'em', 
-                 'blockquote', 'label', 'button', 'td', 'th']
-    
-    elementos_info = []
-
-    for tag in etiquetas:
-        elementos = driver.find_elements(By.TAG_NAME, tag)
-        for el in elementos:
-            if el.text.strip():
-                data = ElementData(
-                    tag=el.tag_name,
-                    text=el.text.strip(),
-                    element_id=el.get_attribute("id"),
-                    element_class=el.get_attribute("class"),
-                    location=el.location,
-                    displayed=el.is_displayed(),
-                    is_active=el.is_enabled()
-                )
-                elementos_info.append(data)
-
-    return elementos_info
 
 
 
@@ -50,24 +56,47 @@ def extract_elements_info(driver):
 
 def main():
     try:
+        cantidad_parrafos = 0
+        cantidad_palabras = 0
+        cantidad_faltas = 0
+        
         elementos_faltas = []
         elementos_bien = []
         driver = initialize_driver('https://tecnomarketrd.com/')
         time.sleep(1)
-        elementos_info = extract_elements_info(driver)
+        elementos_info = extraer_elements(driver)
+        
+        cantidad_parrafos = len(elementos_info)
+        # cantidad_palabras = sum(len(e.text.split()) for e in elementos_info)
 
         for elemento in elementos_info:
+     
             # print(detectar_falta_ortografica(elemento.text))
-            if detectar_falta_ortografica(elemento.text)[0] == 1:
+            detectadas = detectar_falta_ortografica(elemento.texto)
+
+            if detectadas[0] == 1:
+                resaltar_palabras(driver, detectadas[1])
                 elementos_faltas.append(elemento)
+                elemento.faltas_ortograficas = detectadas[1]
+
+                print(elemento.faltas_ortograficas)
+
+                cantidad_faltas += len(detectadas[1])
+                elementos_faltas.append(elemento)
+
             else:
                 elementos_bien.append(elemento)
 
-        print(f"Elementos con faltas ortográficas: {len(elementos_faltas)}")
-        print(f"Elementos sin faltas ortográficas: {len(elementos_bien)}")
+            palabras_parrafo = len(elemento.texto.split())
+            cantidad_palabras += palabras_parrafo 
 
-
-
+        capturar_pagina_completa(driver, "pagina_con_faltas.png")
+        # print(f"Elementos con faltas ortográficas: {len(elementos_faltas)}")
+        # print(f"Elementos sin faltas ortográficas: {len(elementos_bien)}")
+        print(f"Cantidad de párrafos analizados: {cantidad_parrafos}")
+        print(f"Cantidad de palabras analizadas: {cantidad_palabras}")
+        print(f"Cantidad de faltas ortográficas: {cantidad_faltas}")
+        print(elementos_faltas[0].faltas_ortograficas)
 
 
 
