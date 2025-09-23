@@ -15,7 +15,8 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 def get_driver(chromedriver_path, use_brave=False):
     options = Options()
     if use_brave:
-        options.binary_location = r"C:\EJERCICIOS DE PRUEBAS\PROGRAMAS\chromedriver.exe"
+        # Update this path to the actual Brave browser executable, not chromedriver.exe
+        options.binary_location = r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
     service = Service(executable_path=chromedriver_path)
     return webdriver.Chrome(service=service, options=options)
 
