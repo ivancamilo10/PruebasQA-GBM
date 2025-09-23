@@ -17,6 +17,9 @@ from funciones.capturar_pagina import capturar_pagina_completa
 from funciones.utilidades import extraer_elements
 
 
+from Generador_de_reporte import generate_report_from_elements
+
+
 
 
 
@@ -55,6 +58,8 @@ def initialize_driver(URL='https://www.google.com'):
 
 
 def main():
+    Url_pagina = 'https://tecnomarketrd.com/'
+    
     try:
         cantidad_parrafos = 0
         cantidad_palabras = 0
@@ -62,25 +67,25 @@ def main():
         
         elementos_faltas = []
         elementos_bien = []
-        driver = initialize_driver('https://tecnomarketrd.com/')
+        driver = initialize_driver(Url_pagina)
         time.sleep(1)
         elementos_info = extraer_elements(driver)
         
         cantidad_parrafos = len(elementos_info)
         # cantidad_palabras = sum(len(e.text.split()) for e in elementos_info)
-
+        n=1
         for elemento in elementos_info:
      
             # print(detectar_falta_ortografica(elemento.text))
             detectadas = detectar_falta_ortografica(elemento.texto)
 
             if detectadas[0] == 1:
-                n=0
                 resaltar_palabras(driver, detectadas[1])
                 elementos_faltas.append(elemento)
                 elemento.faltas_ortograficas = detectadas[1]
-                elemento.id_elemento = f"p-{n+1}"
-                
+                elemento.id_elemento = f"p-{n}"
+                n+=1
+
                 print(elemento.id_elemento)
                 print(elemento.faltas_ortograficas)
 
@@ -93,7 +98,7 @@ def main():
             palabras_parrafo = len(elemento.texto.split())
             cantidad_palabras += palabras_parrafo 
 
-        capturar_pagina_completa(driver, "pagina_con_faltas.png")
+        screenshot = capturar_pagina_completa(driver, "pagina_con_faltas.png")
         # print(f"Elementos con faltas ortográficas: {len(elementos_faltas)}")
         # print(f"Elementos sin faltas ortográficas: {len(elementos_bien)}")
         print(f"Cantidad de párrafos analizados: {cantidad_parrafos}")
@@ -101,6 +106,19 @@ def main():
         print(f"Cantidad de faltas ortográficas: {cantidad_faltas}")
 
         print(elementos_faltas[0].faltas_ortograficas)
+        
+        reporte  = generate_report_from_elements(
+            page_name=Url_pagina,
+            elementos_faltas=elementos_faltas,
+            paragraphs_count=cantidad_parrafos,
+            words_count=cantidad_palabras,
+            errors_count=cantidad_faltas,
+            screenshot_path=screenshot,
+            output_root="reports",
+            top_n=10
+        )
+        
+        print(f"Reporte generado: {reporte}")
 
 
 
