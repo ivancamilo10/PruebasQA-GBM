@@ -1,3 +1,9 @@
+# Proyectos de QA – Iván Camilo Mejía Triana
+
+Este repositorio contiene mis proyectos de **Quality Assurance (QA)**, enfocados en pruebas de **APIs**, rendimiento y automatización utilizando **Postman** y **JMeter**.
+
+---
+
 ## 🔹 Proyectos
 
 ### 1. Pruebas de APIs con Postman
