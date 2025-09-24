@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 import time
 
-service = Service(r"C:\EJERCICIOS DE PRUEBAS\PROGRAMAS\chromedriver.exe")
+service = Service(r"C:\EJERCICIOS DE PRUEBAS\PROGRAMAS\Drivers\chromedriver.exe")
 driver = webdriver.Chrome(service=service)
 
 
