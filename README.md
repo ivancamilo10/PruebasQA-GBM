@@ -1,3 +1,3 @@
 # PruebasQA-GBM
 
-Andres Pereira
+Ali Ortiz
