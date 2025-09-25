@@ -1,32 +1,23 @@
 # PruebasQA-GBM
 
 Repositorio: **PruebasQA-GBM**  
-Descripción: Este repositorio contiene las pruebas (QA) relacionadas con los proyectos de GBM. Aquí subimos casos de prueba, scripts, evidencias y documentación asociada para asegurar la calidad del software.
 
----
-
-## Contenido del repositorio
-
-- `tests/`  
-  Carpeta principal donde se alojan los casos de prueba automatizados y manuales.
-- `scripts/`  
-  Scripts de utilidad para ejecutar pruebas, preparar entornos o generar informes.
-- `evidencias/`  
-  Capturas, logs y resultados de ejecución (reports) que sirven como evidencia de las pruebas realizadas.
-- `docs/`  
-  Documentación complementaria: guías de uso, criterios de aceptación y flujos de prueba.
-- `README.md`  
-  Este archivo.
-
-
-
----
-
-## Objetivo
-
-Centralizar y versionar todas las pruebas de QA para facilitar:
-- Revisión y trazabilidad de casos de prueba.
-- Reutilización de scripts y configuraciones.
-- Generación de evidencias y reportes de ejecución.
-- Colaboración entre miembros del equipo.
-- 
+## **Descripción**
+Este repositorio contiene los ejercicios y carpetas individuales de los practicantes de la empresa.  
+Cada participante tiene su propia carpeta.
+ 
+## **Objetivo**
+El objetivo de este repositorio es **centralizar el trabajo de todos los practicantes**, permitiendo que cada uno organice sus ejercicios de forma independiente y que sea fácil revisar el progreso de cada participante.
+ 
+## **Estructura del Repo**
+  - Cada participante tiene su propia carpeta con su *nombre o identificador*.  
+  - Dentro de cada carpeta pueden estar subcarpetas y archivos de ese participante.
+- **README.md** → Este archivo de documentación principal.
+ 
+## **Uso**
+- Cada participante debe trabajar en su **propia rama**.  
+- Los cambios se integran a **`main`** mediante *Pull Requests*.  
+- Se recomienda mantener cada carpeta organizada con subcarpetas y archivos.
+ 
+## **Notas**
+- Este repo es *libre y organizado por los practicantes*, por lo que la estructura puede actualizarse según sea necesario.
