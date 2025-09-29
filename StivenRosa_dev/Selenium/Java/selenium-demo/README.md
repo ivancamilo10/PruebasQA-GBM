@@ -1,1 +1,0 @@
-Practicando lo basico primordiar mente e introduciendome a la tecnologia en java
