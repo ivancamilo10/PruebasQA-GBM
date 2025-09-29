@@ -1,3 +1,2 @@
 # PruebasQA-GBM
 
-Andres Pereira
