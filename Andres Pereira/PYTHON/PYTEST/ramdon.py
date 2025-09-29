@@ -1,6 +1,9 @@
 import random
 
-estudiantes = ["Juan", "Ana", "Luis", "Marta", "Carlos"]
+estudiantes = ["Ana", "Luis", "Carlos", "Marta", "Sofía", "Jorge", "Lucía",
+               "Diego", "Elena", "Pablo", "Carmen", "Alberto", "Isabel", "Fernando", "Raquel"]
 
-numero_aleatorio = random.randint(0, len(estudiantes) - 1)
-print(f"El estudiante seleccionado es: {estudiantes[numero_aleatorio]}")
+
+estudiante_seleccionado = random.randint(0, len(estudiantes)-1)
+
+print(f"El estudiante ganador es :{estudiantes[estudiante_seleccionado]}")
